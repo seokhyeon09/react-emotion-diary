@@ -10,15 +10,21 @@ import NotFound from './pages/NotFound'
 const mockData = [
   {
     id: 1,
-    createdDate: new Date().getTime(),
+    createdDate: new Date('2026-02-15').getTime(),
     emotionId: 1,
     content: '1번 일기의 내용'
   },
   {
     id: 2,
-    createdDate: new Date().getTime(),
+    createdDate: new Date('2026-02-10').getTime(),
     emotionId: 3,
     content: '2번 일기의 내용'
+  },
+  {
+    id: 3,
+    createdDate: new Date('2026-01-16').getTime(),
+    emotionId: 5,
+    content: '3번 일기의 내용'
   },
 ]
 
