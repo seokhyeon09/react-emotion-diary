@@ -18,7 +18,10 @@ const DiaryItem = ({ id, content, createdDate, emotionId }) => {
                 <div className="created-date">{new Date(createdDate).toLocaleDateString()}</div>
                 <div className="content">{content}</div>
             </div>
-            <div className="button-section">
+            <div
+                className="button-section"
+                onClick={() => nav(`/edit/${id}`)}
+            >
                 <Button text={'수정하기'} />
             </div>
         </div>

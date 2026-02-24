@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Editor.css'
 import Button from './Button'
 import EmotionItem from './EmotionItem'
@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { getStringedDate } from '../utill/getStringedDate'
 import { emotionList } from '../utill/constants'
 
-const Editor = ({ onSumit }) => {
+const Editor = ({ initData, onSubmit }) => {
 
     const nav = useNavigate()
 
@@ -15,6 +15,15 @@ const Editor = ({ onSumit }) => {
         emotionId: 3,
         content: ''
     })
+
+    useEffect(() => {
+        if (initData) {
+            setInput({
+                ...initData,
+                createdDate: new Date(Number(initData.createdDate))
+            })
+        }
+    }, [initData])
 
     const onChangeInput = (e) => {
         let name = e.target.name
@@ -28,8 +37,8 @@ const Editor = ({ onSumit }) => {
             [name]: value,
         })
     }
-    const onSumitButtonClick=()=>{
-        onSumit(input)
+    const onSubmitButtonClick = () => {
+        onSubmit(input)
     }
     return (
         <div className='Editor'>
@@ -49,11 +58,11 @@ const Editor = ({ onSumit }) => {
                     <EmotionItem
                         key={item.emotionId}
                         {...item}
-                        onClick={()=>{
+                        onClick={() => {
                             onChangeInput({
-                                target:{
-                                    name:'emotionId',
-                                    value:item.emotionId
+                                target: {
+                                    name: 'emotionId',
+                                    value: item.emotionId
                                 }
                             })
                         }}
@@ -65,23 +74,23 @@ const Editor = ({ onSumit }) => {
             <section className='content-section'>
                 <h4>오늘의 일기</h4>
                 <textarea
-                placeholder='오늘은 어땠나요?'
-                name='content'
-                onChange={onChangeInput}
-                value={input.content}
+                    placeholder='오늘은 어땠나요?'
+                    name='content'
+                    onChange={onChangeInput}
+                    value={input.content}
                 >
 
                 </textarea>
             </section>
             <section className="button-section">
                 <Button
-                text={'취소하기'}
-                onClick={()=>nav(-1)}
+                    text={'취소하기'}
+                    onClick={() => nav(-1)}
                 />
                 <Button
-                text={'작성완료'}
-                type={'POSITIVE'} 
-                onClick={onSumitButtonClick}
+                    text={'작성완료'}
+                    type={'POSITIVE'}
+                    onClick={onSubmitButtonClick}
                 />
             </section>
         </div>

@@ -9,7 +9,7 @@ const New = () => {
   const nav = useNavigate()
   const { onCreate } = useContext(DiaryDispatchContext)
 
-  const onSumit = (input) => {
+  const onSubmit = (input) => {
     onCreate(
       input.createdDate.getTime(),
       input.emotionId,
@@ -27,7 +27,7 @@ const New = () => {
             onClick={() => nav(-1)}
           />}
       />
-      <Editor onSumit={onSumit} />
+      <Editor onSubmit={onSubmit} />
 
     </div>
   )
