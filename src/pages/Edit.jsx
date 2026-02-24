@@ -4,20 +4,16 @@ import Header from '../components/Header'
 import Button from '../components/Button'
 import Editor from '../components/Editor'
 import { DiaryDispatchContext, DiaryStateContext } from '../App'
+import useDiary from '../hooks/useDiary'
 
 const Edit = () => {
   const { id } = useParams()
   const nav = useNavigate()
   const { onDelete, onUpdate } = useContext(DiaryDispatchContext)
   const data = useContext(DiaryStateContext)
-  const [curDiaryItem, setCurDiaryItem] = useState(null)
+  const curDiaryItem=useDiary({id})
 
-  useEffect(() => {
-    const currentDiaryItem = data.find(
-      (item) => String(item.id) === String(id)
-    )
-    setCurDiaryItem(currentDiaryItem)
-  }, [id, nav, data])
+  
 
   const onClickDelete = () => {
     if (window.confirm('일기를 정말 삭제할까요?')) {
