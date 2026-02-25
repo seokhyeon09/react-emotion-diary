@@ -5,12 +5,15 @@ import Button from '../components/Button'
 import Viewer from '../components/Viewer'
 import useDiary from '../hooks/useDiary'
 import { getStringedDate } from '../utill/getStringedDate'
+import useTitle from '../hooks/useTitle'
 
 const Diary = () => {
   const {id} = useParams()
   const nav = useNavigate()
 
   const curDiaryItem = useDiary({id})
+
+  useTitle(`${id}번째 다이어리`)
   if(!curDiaryItem){
     return <div>불러오는 중....</div>
   }

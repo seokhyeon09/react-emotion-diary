@@ -5,15 +5,16 @@ import Button from '../components/Button'
 import Editor from '../components/Editor'
 import { DiaryDispatchContext, DiaryStateContext } from '../App'
 import useDiary from '../hooks/useDiary'
-
+import useTitle from '../hooks/useTitle'
 const Edit = () => {
   const { id } = useParams()
   const nav = useNavigate()
   const { onDelete, onUpdate } = useContext(DiaryDispatchContext)
   const data = useContext(DiaryStateContext)
   const curDiaryItem=useDiary({id})
-
   
+  
+  useTitle(`다이어리 수정`)
 
   const onClickDelete = () => {
     if (window.confirm('일기를 정말 삭제할까요?')) {
