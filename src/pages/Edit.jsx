@@ -1,11 +1,57 @@
-import React from 'react'
-import { useParams } from 'react-router-dom'
-
+import React, { useContext, useEffect, useState } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
+import Header from '../components/Header'
+import Button from '../components/Button'
+import Editor from '../components/Editor'
+import { DiaryDispatchContext, DiaryStateContext } from '../App'
+import useDiary from '../hooks/useDiary'
+import useTitle from '../hooks/useTitle'
 const Edit = () => {
-  const params = useParams()
+  const { id } = useParams()
+  const nav = useNavigate()
+  const { onDelete, onUpdate } = useContext(DiaryDispatchContext)
+  const data = useContext(DiaryStateContext)
+  const curDiaryItem=useDiary({id})
+  
+  
+  useTitle(`다이어리 수정`)
 
+  const onClickDelete = () => {
+    if (window.confirm('일기를 정말 삭제할까요?')) {
+      onDelete(id)
+      nav('/', { replace: true })
+    }
+  }
+
+  const onSubmit = (input) => {
+    if (window.confirm('일기를 정말 수정할까요?')) {
+      onUpdate(
+        id,
+        input.createdDate,
+        input.emotionId,
+        input.content,
+      )
+      nav('/', {replace:true})
+    }
+  }
   return (
-    <div>{params.id}번 Edit</div>
+    <div>
+      <Header
+        leftChild={<Button
+          text={'뒤로가기'}
+          //뒤로가기는 -1로 해도됨
+          onClick={() => nav(-1)}
+        />}
+        title={'일기 수정하기'}
+        rightChild={<Button
+          text={'삭제하기'}
+          type={'NEGATIVE'}
+          onClick={onClickDelete}
+        />}
+      />
+      {/* edit 에선 onSubmit이지만 Editor에선 onSumit임 */}
+      <Editor initData={curDiaryItem} onSubmit={onSubmit}/>
+    </div>
   )
 }
 
