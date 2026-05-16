@@ -13,27 +13,27 @@
     justify-content: center;
 }
 .img-section img{
-    width: 50%;
+    width: 35%;
 }
 
 .img-section.bg-1 {
-    background-color: rgb(100, 201, 100);
+    background-color: #F1D0C6;
 }
 
 .img-section.bg-2 {
-    background-color: rgb(157, 215, 114);
+    background-color: #FBD361;
 }
 
 .img-section.bg-3 {
-    background-color: rgb(253, 206, 23);
+    background-color: #528CA4;
 }
 
 .img-section.bg-4 {
-    background-color: rgb(253, 132, 70);
+    background-color: #88B24E;
 }
 
 .img-section.bg-5 {
-    background-color: rgb(253, 86, 95);
+    background-color: #929699;
 }
 .info-section{
     flex:1;
